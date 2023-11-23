@@ -1,4 +1,5 @@
 # sh-todo-pern
+Todo app created with PERN stack with authentication
 
 ## tech stacks - PERN
   - frontend - React with Next

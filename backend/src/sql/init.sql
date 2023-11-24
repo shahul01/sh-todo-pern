@@ -10,8 +10,6 @@ CREATE TABLE IF NOT EXISTS public."Todos" (
 	"id" uuid NOT NULL,
 	"title" varchar(255) NOT NULL,
 	"description" varchar(255) NOT NULL,
-	"createdAt" timestamptz NOT NULL,
-	"updatedAt" timestamptz NOT NULL,
 	CONSTRAINT "Todos_pkey" PRIMARY KEY (id)
 );
 
@@ -19,7 +17,6 @@ CREATE TABLE IF NOT EXISTS public."Users"(
   "id" uuid NOT NULL,
   "username" varchar(255) NOT NULL UNIQUE,
   "password" varchar(255) NOT NULL,
-  "createdAt" timestamptz NOT NULL,
-  "updatedAt" timestamptz NOT NULL,
+  "salt" varchar(255) NOT NULL,
   CONSTRAINT "Users_pkey" PRIMARY KEY (id)
 );

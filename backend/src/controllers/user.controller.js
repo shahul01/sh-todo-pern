@@ -1,11 +1,16 @@
 import { User } from '../models/index.js';
 
 
-export const getUsers = async (req, res) => {
+export const getUser = async (req, res) => {
 
   try {
-    const users = await User.findAll();
-    res.status(200).send(users);
+    const { username } = req.params;
+    const userWithoutSecrets = await User.findOne({
+      where: { username },
+      attributes: { exclude: ['password', 'salt']}
+    });
+
+    res.status(200).send(userWithoutSecrets);
 
   } catch (error) {
     console.error(error);
@@ -15,7 +20,7 @@ export const getUsers = async (req, res) => {
 };
 
 export default {
-  getUsers,
+  getUser,
   // (addUser → to add user → register)
   // editUser,
   // deleteUser

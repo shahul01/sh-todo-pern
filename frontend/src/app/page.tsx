@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styles from './page.module.css';
 
 type Todo = {
@@ -18,6 +18,18 @@ export default function Home() {
   const [ todos, setTodos ] = useState<Todo[]>([]);
   const [ newTodoTitle, setNewTodoTitle ] = useState('');
 
+  async function fetchTodos() {
+    const getTodos = await fetch('http://localhost:8000/todos');
+    const resGet = await getTodos.json();
+
+    return resGet;
+  };
+
+  const initFetchTodos = useCallback(async () => {
+    const fetchedTodos = await fetchTodos();
+    setTodos(fetchedTodos);
+  }, []);
+
   function handleAdd() {
     const newTodo = {
       id: simpleUUID(),
@@ -33,6 +45,12 @@ export default function Home() {
       prevTodos.filter(todo => todo.id !== id)
     ));
   };
+
+
+  useEffect(() => {
+    initFetchTodos();
+
+  }, [initFetchTodos]);
 
 
   return (

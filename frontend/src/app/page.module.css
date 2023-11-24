@@ -41,13 +41,5 @@
   font-size: 1.5rem;
 }
 
-.todo button {
-  border-radius: 5px;
-  outline: none;
-  padding: 0.5rem 0.5rem;
-  height: 2.65rem;
-  width: 5rem;
-  font-size: 1.2rem;
-  cursor: pointer;
-  user-select: none;
+.todo .action-buttons {
 }

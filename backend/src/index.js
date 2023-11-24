@@ -1,17 +1,15 @@
 import express from 'express';
+import { initRoutes } from './routes/index.js';
 
 
 const app = express();
 const port = 8000;
 
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 
-
-app.get('/', (req, res) => {
-  console.log('Home page')
-  res.status(200).send('Home page');
-});
+initRoutes(app);
 
 
 app.listen(port, () => {

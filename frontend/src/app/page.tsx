@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from 'react';
 import styles from './page.module.css';
@@ -13,13 +13,9 @@ export default function Home() {
 
   function simpleUUID():string {
     return Math.random().toString().split('.')[1];
+  };
 
-  }
-
-  const [ todos, setTodos ] = useState<Todo[]>([
-    { id: simpleUUID(), title: 'hello', description: 'there' },
-    { id: simpleUUID(), title: 'goodbye', description: 'then' },
-  ]);
+  const [ todos, setTodos ] = useState<Todo[]>([]);
   const [ newTodoTitle, setNewTodoTitle ] = useState('');
 
   function handleAdd() {

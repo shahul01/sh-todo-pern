@@ -1,12 +1,10 @@
-import Todo from '../models/todo.model.js';
-// import { simpleUUID } from '../utils/index.js';
+import { Todo } from '../models/index.js';
 
 
 // app.get('/', (req, res) => {
 //   console.log('Home page')
 //   res.status(200).send('Server is up and running.');
 // });
-
 
 // let todoData = [
 //   { id: simpleUUID(), title: 'hello', description: 'there' },
@@ -21,7 +19,7 @@ export const getTodos = async (req, res) => {
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal Server Error. ' + error.message});
+    res.status(500).json({ message: 'Internal Server Error. ' + error.message });
   };
 
 };

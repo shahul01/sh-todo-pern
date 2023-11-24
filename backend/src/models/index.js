@@ -1,10 +1,12 @@
 "use strict";
 
 import { Sequelize } from 'sequelize';
-// import Todo from './todo.model.js';
+import UserModel from './user.model.js';
+import TodoModel from './todo.model.js';
 
-// /model: index → todo → /controller → /routes → /backend
+// /model. model + associations from index → /controller → /routes → /backend
 
+// db connection
 const sequelize = new Sequelize({
   dialect: 'postgres',
   database: 'sh_todo_pern',
@@ -14,14 +16,14 @@ const sequelize = new Sequelize({
   port: 5432
 });
 
-// initialize models with sequelize session
-// Todo(sequelize, Sequelize.DataTypes);
+// Model connections to db / sequelize sessions
+const User = UserModel(sequelize);
+const Todo = TodoModel(sequelize);
 
 
-// add associations here
-
-
-// export sequelize session
+// export sequelize session and connected models
 export {
-  sequelize
+  sequelize,
+  User,
+  Todo
 };

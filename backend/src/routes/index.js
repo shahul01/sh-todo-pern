@@ -1,4 +1,5 @@
 import todoRoutes from "./todo.routes.js";
+import userRoutes from "./user.routes.js";
 
 
 /**
@@ -8,5 +9,7 @@ import todoRoutes from "./todo.routes.js";
 export function initRoutes(app) {
 
   app.use("/todos", todoRoutes);
+
+  app.use("/users", userRoutes);
 
 };

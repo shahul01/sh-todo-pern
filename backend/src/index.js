@@ -13,10 +13,10 @@ app.use(express.json());
 
 
 
-
 initRoutes(app);
 
-
+// this will drop all tables and recreate them everytime the server starts
+// https://sebhastian.com/sequelize-create-table/
 sequelize.sync({ force: false }).then(() => {
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

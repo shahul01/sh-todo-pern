@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from 'react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import styles from './page.module.css';
 
 type Todo = {
@@ -10,6 +11,10 @@ type Todo = {
 }
 
 export default function Home() {
+
+  const [ todoAnimRef, enableAnimations ] = useAutoAnimate({
+    disrespectUserMotionPreference: true
+  });
 
   function simpleUUID():string {
     return Math.random().toString().split('.')[1];
@@ -86,7 +91,7 @@ export default function Home() {
           </button>
         </div>
 
-        <div className={styles['todos-container']}>
+        <div className={styles['todos-container']} ref={todoAnimRef}>
           {
             todos.map(todo => (
               <div key={todo.id} className={styles['todo']}>

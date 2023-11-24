@@ -23,6 +23,20 @@ export const getTodos = (req, res) => {
 
 };
 
+export const addTodo = (req, res) => {
+  try {
+
+    const { body } = req;
+    todoData.push(body);
+
+    res.status(200).json({ message: `Todo added successfully with title ${body?.title}` });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error. ' + error.message });
+  }
+}
+
 export const deleteTodo = (req, res) => {
   try {
     const reqId = req.params.id;
@@ -41,5 +55,6 @@ export const deleteTodo = (req, res) => {
 
 export default {
   getTodos,
+  addTodo,
   deleteTodo
 }

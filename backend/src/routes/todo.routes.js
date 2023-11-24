@@ -5,6 +5,8 @@ const router = Router();
 
 router.get('/', TodoController.getTodos);
 
+router.post('/', TodoController.addTodo);
+
 router.delete('/:id', TodoController.deleteTodo);
 
 

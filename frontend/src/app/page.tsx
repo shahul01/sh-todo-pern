@@ -25,9 +25,20 @@ export default function Home() {
     return resGet;
   };
 
+  async function addTodos(addTodoData:Todo) {
+    const addTodo = await fetch('http://localhost:8000/todos', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(addTodoData)
+    });
+    const resAdd = await addTodo.json();
+
+    return resAdd;
+  }
+
   async function deleteTodos(id:string) {
     const deleteTodos = await fetch(`http://localhost:8000/todos/${id}`, {
-      method: 'DELETE'
+      method: "DELETE"
     });
     const resDelete = await deleteTodos.json();
 
@@ -39,18 +50,21 @@ export default function Home() {
     setTodos(fetchedTodos);
   }, []);
 
-  function handleAdd() {
+  async function handleAdd() {
     const newTodo = {
       id: simpleUUID(),
       title: newTodoTitle,
       description: '',
     };
 
-    setTodos(prev => [...prev, newTodo]);
+    const addedTodos = await addTodos(newTodo);
+
+    return fetchTodosToState();
+
   };
 
   async function handleDelete(id:string) {
-    const removeTodos =  await deleteTodos(id);
+    const deletedTodos =  await deleteTodos(id);
 
     return fetchTodosToState();
   };

@@ -16,4 +16,7 @@ export const getUsers = async (req, res) => {
 
 export default {
   getUsers,
+  // (addUser → to add user → register)
+  // editUser,
+  // deleteUser
 };

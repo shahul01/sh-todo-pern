@@ -1,5 +1,6 @@
-import todoRoutes from "./todo.routes.js";
+import authRoutes from "./auth.routes.js";
 import userRoutes from "./user.routes.js";
+import todoRoutes from "./todo.routes.js";
 
 
 /**
@@ -8,8 +9,10 @@ import userRoutes from "./user.routes.js";
  */
 export function initRoutes(app) {
 
-  app.use("/todos", todoRoutes);
+  app.use('/auth', authRoutes);
 
   app.use("/users", userRoutes);
+
+  app.use("/todos", todoRoutes);
 
 };

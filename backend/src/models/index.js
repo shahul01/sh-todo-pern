@@ -4,7 +4,7 @@ import { Sequelize } from 'sequelize';
 import UserModel from './user.model.js';
 import TodoModel from './todo.model.js';
 
-// /model. model + associations from index → /controller → /routes → /backend
+// /model: model + associations from index → /controller → /routes → /backend
 
 // db connection
 const sequelize = new Sequelize({

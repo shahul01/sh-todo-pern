@@ -25,7 +25,16 @@ export default function Home() {
     return resGet;
   };
 
-  const initFetchTodos = useCallback(async () => {
+  async function deleteTodos(id:string) {
+    const deleteTodos = await fetch(`http://localhost:8000/todos/${id}`, {
+      method: 'DELETE'
+    });
+    const resDelete = await deleteTodos.json();
+
+    return resDelete;
+  };
+
+  const fetchTodosToState = useCallback(async () => {
     const fetchedTodos = await fetchTodos();
     setTodos(fetchedTodos);
   }, []);
@@ -40,17 +49,17 @@ export default function Home() {
     setTodos(prev => [...prev, newTodo]);
   };
 
-  function handleDelete(id:string) {
-    setTodos(prevTodos => (
-      prevTodos.filter(todo => todo.id !== id)
-    ));
+  async function handleDelete(id:string) {
+    const removeTodos =  await deleteTodos(id);
+
+    return fetchTodosToState();
   };
 
 
   useEffect(() => {
-    initFetchTodos();
+    fetchTodosToState();
 
-  }, [initFetchTodos]);
+  }, [fetchTodosToState]);
 
 
   return (

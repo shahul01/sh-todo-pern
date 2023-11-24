@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import toast from 'react-simple-toasts';
 import styles from './page.module.css';
 
 type Todo = {
@@ -51,8 +52,19 @@ export default function Home() {
   };
 
   const fetchTodosToState = useCallback(async () => {
-    const fetchedTodos = await fetchTodos();
-    setTodos(fetchedTodos);
+    let fetchedTodos = [];
+
+    try {
+      fetchedTodos = await fetchTodos();
+    } catch ( error ) {
+      console.error(error);
+      toast('Error when fetching todos. Try again later.');
+    };
+
+
+    if (fetchedTodos.length) {
+      setTodos(fetchedTodos);
+    };
   }, []);
 
   async function handleAdd() {
@@ -62,14 +74,26 @@ export default function Home() {
       description: '',
     };
 
-    const addedTodos = await addTodos(newTodo);
+    try {
+      const addedTodos = await addTodos(newTodo);
+      // console.log(`addedTodos: `, addedTodos);
+
+    } catch (error) {
+      console.error(`sh-error: `, error);
+      toast('Error when adding todo. Try again later.');
+    }
 
     return fetchTodosToState();
 
   };
 
   async function handleDelete(id:string) {
-    const deletedTodos =  await deleteTodos(id);
+    try {
+      await deleteTodos(id);
+    } catch(error) {
+      console.error(error);
+      toast('Error when deleting todo. Try again later.');
+    }
 
     return fetchTodosToState();
   };
@@ -77,7 +101,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchTodosToState();
-
+    console.log('runs');
   }, [fetchTodosToState]);
 
 

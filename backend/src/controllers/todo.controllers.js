@@ -1,5 +1,5 @@
 import Todo from '../models/todo.model.js';
-import { simpleUUID } from '../utils/index.js';
+// import { simpleUUID } from '../utils/index.js';
 
 
 // app.get('/', (req, res) => {
@@ -8,10 +8,10 @@ import { simpleUUID } from '../utils/index.js';
 // });
 
 
-let todoData = [
-  { id: simpleUUID(), title: 'hello', description: 'there' },
-  { id: simpleUUID(), title: 'goodbye', description: 'then' },
-];
+// let todoData = [
+//   { id: simpleUUID(), title: 'hello', description: 'there' },
+//   { id: simpleUUID(), title: 'goodbye', description: 'then' },
+// ];
 
 export const getTodos = async (req, res) => {
   try {
@@ -62,4 +62,4 @@ export default {
   getTodos,
   addTodo,
   deleteTodo
-}
+};

@@ -5,14 +5,14 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 import styles from './page.module.css';
 
 type Todo = {
-  id: string;
+  id?: string;
   title: string;
   description: string;
 }
 
 export default function Home() {
 
-  const [ todoAnimRef, enableAnimations ] = useAutoAnimate({
+  const [ todoAnimRef ] = useAutoAnimate({
     disrespectUserMotionPreference: true
   });
 
@@ -57,7 +57,7 @@ export default function Home() {
 
   async function handleAdd() {
     const newTodo = {
-      id: simpleUUID(),
+      // id: simpleUUID(),
       title: newTodoTitle,
       description: '',
     };

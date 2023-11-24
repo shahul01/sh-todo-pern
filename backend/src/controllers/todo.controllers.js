@@ -1,3 +1,4 @@
+import Todo from '../models/todo.model.js';
 import { simpleUUID } from '../utils/index.js';
 
 
@@ -12,9 +13,11 @@ let todoData = [
   { id: simpleUUID(), title: 'goodbye', description: 'then' },
 ];
 
-export const getTodos = (req, res) => {
+export const getTodos = async (req, res) => {
   try {
-    res.status(200).json(todoData);
+
+    const todos = await Todo.findAll();
+    res.status(200).json(todos);
 
   } catch (error) {
     console.error(error);
@@ -23,11 +26,11 @@ export const getTodos = (req, res) => {
 
 };
 
-export const addTodo = (req, res) => {
+export const addTodo = async (req, res) => {
   try {
 
     const { body } = req;
-    todoData.push(body);
+    await Todo.create(body);
 
     res.status(200).json({ message: `Todo added successfully with title ${body?.title}` });
 
@@ -37,12 +40,14 @@ export const addTodo = (req, res) => {
   }
 }
 
-export const deleteTodo = (req, res) => {
+export const deleteTodo = async (req, res) => {
   try {
-    const reqId = req.params.id;
 
-    todoData = todoData.filter((todo) => {
-      return todo.id !== reqId;
+    const reqId = req.params.id;
+    await Todo.destroy({
+      where: {
+        id: reqId
+      }
     })
 
     res.status(200).json({ message: `Todo deleted successfully of id ${reqId}`});

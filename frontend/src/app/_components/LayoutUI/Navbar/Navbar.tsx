@@ -19,7 +19,7 @@ const Navbar:NavbarProps = (props) => {
       <div className={styles['links']}>
         <Link href='/'>Home</Link>
         <Link href='/todos'>Todos</Link>
-        <Link href='/auth'>SignIn</Link>
+        <Link href='/auth/sign-in'>SignIn</Link>
       </div>
 
     </div>

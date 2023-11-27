@@ -75,22 +75,31 @@ const SignIn:SignInProps = (props:{}) => {
     const resData = resPost.data;
     console.log(`submittedFormData: `, resData);
 
-    if (process.env.NODE_ENV === 'development' && resData.token) {
-      setCookie('token', resData.token);
-      const tkn = cookies;
-      console.log(`tkn: `, tkn);
+    if (resData.token) {
+
+      dispatch(authSlice.actions.setIsAuth(true));
+
+      // manually set cookies for dev env as its not set by Chrome
+      if (process.env.NODE_ENV === 'development') {
+        setCookie('token', resData.token);
+
+        // check
+        const tkn = cookies?.token;
+        console.log(`tkn: `, tkn);
+      };
+
     };
 
   };
 
   useEffect(() => {
-    const tkn = cookies;
-    console.log(`tkn: `, tkn);
+    // console.log(`## cookies.token: `, cookies.token);
+  }, [cookies]);
 
+  useEffect(() => {
     console.log(`isAuth: `, isAuth);
-    // useSelector()
 
-  }, []);
+  }, [isAuth]);
 
 
 

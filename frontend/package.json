@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "engineStrict": true,
   "dependencies": {
     "@formkit/auto-animate": "^0.8.1",
     "@reduxjs/toolkit": "^1.9.7",

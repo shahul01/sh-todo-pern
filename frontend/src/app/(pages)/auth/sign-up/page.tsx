@@ -1,7 +1,8 @@
 "use client";
 
 import Link from 'next/link';
-import { ChangeEventHandler, InputHTMLAttributes, SetStateAction, useState } from 'react';
+import { useState } from 'react';
+import styles from './signUp.module.css';
 
 
 type ModelUser = {
@@ -55,11 +56,13 @@ const SignUp:SignUpProps = (props: {}) => {
   };
 
   return (
-    <div className='sign-up'>
+    <div className={styles['sign-up']}>
       <h1>SignUp</h1>
-      <h3>{!isValid && 'Form has error'}</h3>
-      <div className='form-container'>
-        <div className='inputs'>
+      <h3 className={styles['error-text']}>
+        {!isValid && 'Form has error'}
+      </h3>
+      <div className={styles['form-container']}>
+        <div className={styles['inputs']}>
           <input
             type='text'
             placeholder='Username'
@@ -83,12 +86,12 @@ const SignUp:SignUpProps = (props: {}) => {
           />
 
         </div>
-        <div className='buttons'>
+        <div className={styles['buttons']}>
           <button type='submit' onClick={handleSubmit}>
             SignUp
           </button>
         </div>
-        <div className='helper'>
+        <div className={styles['helper']}>
           <span>Already have an account? </span>
           <span>
             <Link

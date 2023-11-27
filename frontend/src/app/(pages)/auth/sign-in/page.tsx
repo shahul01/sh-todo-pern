@@ -2,7 +2,13 @@
 
 import Link from 'next/link';
 import { useCookies } from 'react-cookie';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import {
+  authSlice,
+  useSelector,
+  useDispatch,
+  selectIsAuth
+} from '@/lib/redux';
 import styles from './signIn.module.css';
 
 type ModelUser = {
@@ -17,6 +23,9 @@ type SignInProps = {
 
 const SignIn:SignInProps = (props:{}) => {
   const {  } = props;
+
+  const dispatch = useDispatch();
+  const isAuth = useSelector(selectIsAuth);
 
   const [ cookies, setCookie, removeCookie ] = useCookies(['token']);
   const initialForm:ModelUser = {
@@ -68,11 +77,22 @@ const SignIn:SignInProps = (props:{}) => {
 
     if (process.env.NODE_ENV === 'development' && resData.token) {
       setCookie('token', resData.token);
-      // const tkn = cookies;
-      // console.log(`tkn: `, tkn);
-    }
+      const tkn = cookies;
+      console.log(`tkn: `, tkn);
+    };
 
   };
+
+  useEffect(() => {
+    const tkn = cookies;
+    console.log(`tkn: `, tkn);
+
+    console.log(`isAuth: `, isAuth);
+    // useSelector()
+
+  }, []);
+
+
 
   return (
     <div className={styles['sign-in']}>

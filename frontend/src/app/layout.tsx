@@ -1,6 +1,7 @@
-import type { Metadata } from 'next'
-import Navbar from '@/app/_components/LayoutUI/Navbar/Navbar';
 import { Inter } from 'next/font/google';
+import type { Metadata } from 'next';
+import Navbar from '@/app/_components/LayoutUI/Navbar/Navbar';
+import { Providers } from '@/lib/providers';
 import styles from './layout.module.css';
 import './globals.css';
 
@@ -17,15 +18,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <div className={styles['navbar-container']}>
-          <Navbar />
-        </div>
-        <div className={styles['children-container']}>
-          {children}
-        </div>
-      </body>
-    </html>
+    <Providers>
+      <html lang="en">
+        <body className={inter.className}>
+          <div className={styles['navbar-container']}>
+            <Navbar />
+          </div>
+          <div className={styles['children-container']}>
+            {children}
+          </div>
+        </body>
+      </html>
+    </Providers>
   )
-}
+};

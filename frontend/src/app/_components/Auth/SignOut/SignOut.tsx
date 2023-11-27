@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import {
   authSlice,
   useDispatch,
-  useSelector,
-  selectIsAuth
 } from '@/lib/redux';
 import toast, { toastConfig } from 'react-simple-toasts';
 
@@ -17,7 +15,6 @@ const SignOut:SignOutProps = (props:{}) => {
   const {  } = props;
 
   const dispatch = useDispatch();
-  const isAuth = useSelector(selectIsAuth);
 
   toastConfig({
     position: 'top-center',
@@ -42,9 +39,6 @@ const SignOut:SignOutProps = (props:{}) => {
       toast('Signed out successfully.');
 
     };
-
-    console.log(`selectIsAuth: `, isAuth);
-
   };
 
 

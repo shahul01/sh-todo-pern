@@ -118,7 +118,7 @@ const Todos:TodosProps = (props:any) => {
 
   useEffect(() => {
     fetchTodosToState();
-    console.log('runs');
+
   }, [fetchTodosToState]);
 
 

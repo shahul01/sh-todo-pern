@@ -13,10 +13,9 @@ type NavbarProps = {
 };
 
 
-const Navbar:NavbarProps = (props) => {
+const Navbar:NavbarProps = (props:{}) => {
   const {  } = props;
   const isAuth = useSelector(selectIsAuth);
-  console.log(`### isAuth: `, isAuth);
 
   return (
     <div className={styles['navbar']}>

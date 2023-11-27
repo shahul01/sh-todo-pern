@@ -83,11 +83,9 @@ const SignIn:SignInProps = (props:{}) => {
 
   async function handleSubmit() {
     validate();
-    console.log(`formData: `, form);
     if (!isValid) return;
 
     const resPost = await postForm();
-    console.log(`submittedFormData: `, resPost);
 
     if (resPost.token) {
       dispatch(authSlice.actions.setIsAuth(true));

@@ -7,7 +7,7 @@ type AuthProps = {
 };
 
 
-const Auth:AuthProps = (props) => {
+const Auth:AuthProps = (props:{}) => {
   const {  } = props;
 
   redirect('/auth/sign-in');

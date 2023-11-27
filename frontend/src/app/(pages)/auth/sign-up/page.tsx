@@ -55,7 +55,6 @@ const SignUp:SignUpProps = (props: {}) => {
 
   async function handleSubmit() {
     validate();
-    console.log(`formData: `, form);
     if (!isValid) return;
 
     const postReq = await fetch('/api/auth/sign-up',{

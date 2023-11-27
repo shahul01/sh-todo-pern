@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import toast from 'react-simple-toasts';
+import toast, { toastConfig } from 'react-simple-toasts';
 import styles from './page.module.css';
 
 type Todo = {
@@ -13,21 +13,25 @@ type Todo = {
 
 export default function Home() {
 
+  toastConfig({position: 'top-center', duration: 3000});
   const [ todoAnimRef ] = useAutoAnimate({
     disrespectUserMotionPreference: true
   });
-
-  function simpleUUID():string {
-    return Math.random().toString().split('.')[1];
-  };
-
   const [ todos, setTodos ] = useState<Todo[]>([]);
   const [ newTodoTitle, setNewTodoTitle ] = useState('');
 
-  async function fetchTodos() {
-    const getTodos = await fetch('http://localhost:8000/todos');
-    const resGet = await getTodos.json();
+  function errorChecker(res:Response) {
+    if (res.status.toString().startsWith('4'||'5')) {
+      throw new Error(res.statusText);
+    };
+  };
 
+  async function fetchTodos() {
+
+    const getTodos = await fetch('http://localhost:8000/todos');
+    console.log(`getTodos: `, getTodos);
+    errorChecker(getTodos);
+    const resGet = await getTodos.json();
     return resGet;
   };
 
@@ -37,6 +41,7 @@ export default function Home() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(addTodoData)
     });
+    errorChecker(addTodo);
     const resAdd = await addTodo.json();
 
     return resAdd;
@@ -46,6 +51,7 @@ export default function Home() {
     const deleteTodos = await fetch(`http://localhost:8000/todos/${id}`, {
       method: "DELETE"
     });
+    errorChecker(deleteTodos);
     const resDelete = await deleteTodos.json();
 
     return resDelete;
@@ -58,7 +64,7 @@ export default function Home() {
       fetchedTodos = await fetchTodos();
     } catch ( error ) {
       console.error(error);
-      toast('Error when fetching todos. Try again later.');
+      toast(`Error when fetching todos. Try again later. ${error}`);
     };
 
 
@@ -80,7 +86,7 @@ export default function Home() {
 
     } catch (error) {
       console.error(`sh-error: `, error);
-      toast('Error when adding todo. Try again later.');
+      toast(`Error when adding todo. Try again later. ${error}`);
     }
 
     return fetchTodosToState();
@@ -92,7 +98,7 @@ export default function Home() {
       await deleteTodos(id);
     } catch(error) {
       console.error(error);
-      toast('Error when deleting todo. Try again later.');
+      toast(`Error when deleting todo. Try again later. ${error}`);
     }
 
     return fetchTodosToState();

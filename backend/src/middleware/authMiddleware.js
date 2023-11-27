@@ -6,8 +6,10 @@ function authToken(req, res, next) {
   const token = req.headers.authorization;
 
   if (!token) {
+
+    // return doesnt catch error on FE, throw error instead?
     return res.status(401).json({
-      message: 'Unauthorized / Invalid token. '
+      message: 'Unauthorized / Invalid token.'
     })
   };
 
@@ -15,7 +17,7 @@ function authToken(req, res, next) {
     if (error) {
       return res.status(401).json( {
         message: 'Unauthorized / Invalid token. ' + error.message
-      })
+      });
     };
 
     req.userId = decoded.userId;

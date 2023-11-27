@@ -38,21 +38,38 @@ const SignUp:SignUpProps = (props: {}) => {
   function validate() {
     const { username, password, rePassword  } = form;
 
+    if (!username || !password || !rePassword) {
+      return setIsValid(false);
+    };
+
     // if (username.length <= 3 || password.length <= 3) {
     //   return false;
     // }
 
     if (password !== rePassword) {
       return setIsValid(false);
-    }
+    };
 
-    return setIsValid(true);
+    // return setIsValid(true);
   };
 
   async function handleSubmit() {
     validate();
     console.log(`formData: `, form);
     if (!isValid) return;
+
+    const postReq = await fetch('/api/auth/sign-up',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form)
+    });
+
+    const resPost = await postReq.json();
+    const resData = resPost.data;
+    console.log(`submittedFormData: `, resData);
+
   };
 
   return (
@@ -66,6 +83,7 @@ const SignUp:SignUpProps = (props: {}) => {
           <input
             type='text'
             placeholder='Username'
+            required={true}
             name='username'
             value={form.username}
             onChange={handleChangeForm}
@@ -73,6 +91,7 @@ const SignUp:SignUpProps = (props: {}) => {
           <input
             type='password'
             placeholder='Password'
+            required={true}
             name='password'
             value={form.password}
             onChange={handleChangeForm}
@@ -80,6 +99,7 @@ const SignUp:SignUpProps = (props: {}) => {
           <input
             type='password'
             placeholder='Re-enter password'
+            required={true}
             name='rePassword'
             value={form.rePassword}
             onChange={handleChangeForm}

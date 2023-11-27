@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  height: 100%;
+  padding-top: 10%;
 }
 
 .error-text {
@@ -27,6 +27,7 @@
 
 .form-container .inputs input {
   padding: 0.5rem 0.5rem;
+  font-size: 1rem;
 
   width: 14rem;
 

@@ -1,0 +1,17 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid grey;
+}
+
+.logo {
+
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  text-decoration: underline;
+
+}

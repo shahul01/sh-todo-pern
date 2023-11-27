@@ -50,6 +50,13 @@ button {
   user-select: none;
 }
 
+.custom-toast {
+  /* margin-top: 3rem; */
+  border-radius: 0.2rem;
+  padding: 0.2rem 1rem;
+  background: rgb(var(--background-end-rgb));
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -13,7 +13,11 @@ type Todo = {
 
 export default function Home() {
 
-  toastConfig({position: 'top-center', duration: 3000});
+  toastConfig({
+    position: 'top-center',
+    duration: 3000,
+    className: 'custom-toast'
+  });
   const [ todoAnimRef ] = useAutoAnimate({
     disrespectUserMotionPreference: true
   });
@@ -29,7 +33,7 @@ export default function Home() {
   async function fetchTodos() {
 
     const getTodos = await fetch('http://localhost:8000/todos');
-    console.log(`getTodos: `, getTodos);
+    // console.log(`getTodos: `, getTodos);
     errorChecker(getTodos);
     const resGet = await getTodos.json();
     return resGet;

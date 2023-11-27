@@ -11,7 +11,8 @@ import { Todo } from '../models/index.js';
 //   { id: simpleUUID(), title: 'goodbye', description: 'then' },
 // ];
 
-export const getTodos = async (req, res) => {
+// router.get('/')
+const getTodos = async (req, res) => {
   try {
 
     const todos = await Todo.findAll();
@@ -24,7 +25,8 @@ export const getTodos = async (req, res) => {
 
 };
 
-export const addTodo = async (req, res) => {
+// router.post('/')
+const addTodo = async (req, res) => {
   try {
 
     const { body } = req;
@@ -35,10 +37,11 @@ export const addTodo = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error. ' + error.message });
-  }
-}
+  };
+};
 
-export const deleteTodo = async (req, res) => {
+// router.delete('/:id')
+const deleteTodo = async (req, res) => {
   try {
 
     const reqId = req.params.id;
@@ -53,8 +56,8 @@ export const deleteTodo = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error. ' + error.message });
-  }
-}
+  };
+};
 
 export default {
   getTodos,

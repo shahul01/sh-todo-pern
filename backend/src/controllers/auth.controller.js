@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { User } from '../models/index.js';
 
 
+// router.post('/register')
 const register = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -32,6 +33,7 @@ const register = async (req, res) => {
   };
 };
 
+// router.post('/login')
 const login = async (req, res) => {
   try {
 
@@ -81,6 +83,7 @@ const login = async (req, res) => {
 
 };
 
+// router.post('/logout')
 const logout = async (req, res) => {
   res.clearCookie('token');
   res.status(200).json({

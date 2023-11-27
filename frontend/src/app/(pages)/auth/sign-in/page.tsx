@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import { useCookies } from 'react-cookie';
 import { useState } from 'react';
 import styles from './signIn.module.css';
 
@@ -16,6 +17,8 @@ type SignInProps = {
 
 const SignIn:SignInProps = (props:{}) => {
   const {  } = props;
+
+  const [ cookies, setCookie, removeCookie ] = useCookies(['token']);
   const initialForm:ModelUser = {
     username: '',
     password: '',
@@ -62,6 +65,12 @@ const SignIn:SignInProps = (props:{}) => {
     const resPost = await postReq.json();
     const resData = resPost.data;
     console.log(`submittedFormData: `, resData);
+
+    if (process.env.NODE_ENV === 'development' && resData.token) {
+      setCookie('token', resData.token);
+      // const tkn = cookies;
+      // console.log(`tkn: `, tkn);
+    }
 
   };
 

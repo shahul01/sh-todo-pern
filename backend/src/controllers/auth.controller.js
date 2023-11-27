@@ -63,6 +63,9 @@ const login = async (req, res) => {
       {expiresIn: '1h'}
     );
 
+
+    // cookies dont set on localhost,
+    // maybe you can manually set it for dev env
     res.cookie(
       'token', token, {
         httpOnly: true,

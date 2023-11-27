@@ -12,6 +12,7 @@
     "@formkit/auto-animate": "^0.8.1",
     "next": "14.0.3",
     "react": "^18",
+    "react-cookie": "^6.1.1",
     "react-dom": "^18",
     "react-simple-toasts": "^5.10.0"
   },

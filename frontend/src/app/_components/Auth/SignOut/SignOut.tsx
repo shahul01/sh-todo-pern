@@ -3,6 +3,7 @@ import {
   authSlice,
   useDispatch,
 } from '@/lib/redux';
+import { useCookies } from 'react-cookie';
 import toast, { toastConfig } from 'react-simple-toasts';
 
 
@@ -14,6 +15,7 @@ type SignOutProps = {
 const SignOut:SignOutProps = (props:{}) => {
   const {  } = props;
 
+  const [ cookies, setCookie, removeCookie ] = useCookies('token');
   const dispatch = useDispatch();
 
   toastConfig({
@@ -35,6 +37,12 @@ const SignOut:SignOutProps = (props:{}) => {
     console.log(`resPost: `, resPost);
     if (resPost) {
       dispatch(authSlice.actions.setIsAuth(false));
+
+      // TODO: check if it automatically removes token for production
+      if (process.env.NODE_ENV === 'development') {
+        const tokenR = removeCookie('token');
+
+      };
 
       toast('Signed out successfully.');
 

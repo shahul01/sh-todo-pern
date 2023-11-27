@@ -3,7 +3,8 @@ import jwt from 'jsonwebtoken';
 
 function authToken(req, res, next) {
 
-  const token = req.headers.authorization;
+  const rawToken = req.headers?.cookie;
+  const token = rawToken?.split('=')?.[1] || '';
 
   if (!token) {
 

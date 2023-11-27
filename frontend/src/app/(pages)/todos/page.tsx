@@ -39,7 +39,10 @@ const Todos:TodosProps = (props:any) => {
 
   async function fetchTodos() {
 
-    const getTodos = await fetch('http://localhost:8000/todos');
+    const getTodos = await fetch('http://localhost:8000/todos', {
+      method: 'GET',
+      credentials: 'include'
+    });
     // console.log(`getTodos: `, getTodos);
     errorChecker(getTodos);
     const resGet = await getTodos.json();
@@ -48,7 +51,8 @@ const Todos:TodosProps = (props:any) => {
 
   async function addTodos(addTodoData:Todo) {
     const addTodo = await fetch('http://localhost:8000/todos', {
-      method: "POST",
+      method: 'POST',
+      credentials: 'include',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(addTodoData)
     });
@@ -60,7 +64,8 @@ const Todos:TodosProps = (props:any) => {
 
   async function deleteTodos(id:string) {
     const deleteTodos = await fetch(`http://localhost:8000/todos/${id}`, {
-      method: "DELETE"
+      method: "DELETE",
+      credentials: 'include'
     });
     errorChecker(deleteTodos);
     const resDelete = await deleteTodos.json();
@@ -74,8 +79,7 @@ const Todos:TodosProps = (props:any) => {
     try {
       fetchedTodos = await fetchTodos();
     } catch ( error ) {
-      console.error(error);
-      toast(`Error when fetching todos. Try again later. ${error}`);
+      toast(`Error when fetching todos. ${error}`);
     };
 
 
@@ -141,7 +145,7 @@ const Todos:TodosProps = (props:any) => {
               </div>
 
               <div className={styles['action-btns']}>
-                <button type='button' onClick={() => handleDelete('0')}>
+                <button type='button' onClick={() => handleDelete(todo?.id||'')}>
                   Delete
                 </button>
               </div>

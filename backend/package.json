@@ -8,6 +8,10 @@
     "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "engineStrict": true,
   "author": "shahul01",
   "license": "ISC",
   "dependencies": {

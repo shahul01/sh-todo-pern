@@ -89,7 +89,6 @@ const SignIn:SignInProps = (props:{}) => {
 
     if (resPost.token) {
       dispatch(authSlice.actions.setIsAuth(true));
-      toast('Signed in successfully.');
 
       // manually set cookies for dev env as its not set by Chrome
       if (process.env.NODE_ENV === 'development') {
@@ -100,6 +99,9 @@ const SignIn:SignInProps = (props:{}) => {
         console.log(`tkn: `, tkn);
       };
 
+
+      toast('Signed in successfully.');
+
     };
 
   };
@@ -109,7 +111,7 @@ const SignIn:SignInProps = (props:{}) => {
   }, [cookies]);
 
   useEffect(() => {
-    console.log(`isAuth: `, isAuth);
+    // console.log(`isAuth: `, isAuth);
 
   }, [isAuth]);
 

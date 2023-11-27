@@ -19,15 +19,15 @@ type Todo = {
 const Todos:TodosProps = (props:any) => {
   const {  } = props;
 
-
+  const [ todoAnimRef ] = useAutoAnimate({
+    disrespectUserMotionPreference: true
+  });
   toastConfig({
     position: 'top-center',
     duration: 3000,
     className: 'custom-toast'
   });
-  const [ todoAnimRef ] = useAutoAnimate({
-    disrespectUserMotionPreference: true
-  });
+
   const [ todos, setTodos ] = useState<Todo[]>([]);
   const [ newTodoTitle, setNewTodoTitle ] = useState('');
 

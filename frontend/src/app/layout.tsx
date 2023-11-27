@@ -1,18 +1,17 @@
 "use client";
 
 import { Inter } from 'next/font/google';
-import type { Metadata } from 'next';
+// import type { Metadata } from 'next';
 import { useCookies } from 'react-cookie';
+import { useEffect } from 'react';
 import Navbar from '@/app/_components/LayoutUI/Navbar/Navbar';
 import { Providers } from '@/lib/providers';
 import {
   authSlice,
-  useDispatch,
   reduxStore,
 } from '@/lib/redux';
 import styles from './layout.module.css';
 import './globals.css';
-import { useEffect } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,8 +32,9 @@ export default function RootLayout({
 
   function checkAuth() {
     if (cookies.token) {
-      console.log('cookie', cookies.token);
-      // normal method of updating state doesnt work.
+      // console.log('cookie', cookies.token);
+
+      // normal method of updating state doesn't work.
       // dispatch(authSlice.actions.setIsAuth(false));
     };
 
@@ -42,11 +42,11 @@ export default function RootLayout({
 
   };
 
-
   useEffect(() => {
     checkAuth();
 
   }, [cookies.token]);
+
 
   return (
     <Providers>

@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { useCookies } from 'react-cookie';
+import toast, { toastConfig } from 'react-simple-toasts';
 import { useEffect, useState } from 'react';
 import {
   authSlice,
-  useSelector,
   useDispatch,
+  useSelector,
   selectIsAuth
 } from '@/lib/redux';
 import styles from './signIn.module.css';
@@ -28,6 +29,12 @@ const SignIn:SignInProps = (props:{}) => {
   const isAuth = useSelector(selectIsAuth);
 
   const [ cookies, setCookie, removeCookie ] = useCookies(['token']);
+  toastConfig({
+    position: 'top-center',
+    duration: 3000,
+    className: 'custom-toast'
+  });
+
   const initialForm:ModelUser = {
     username: '',
     password: '',
@@ -58,11 +65,8 @@ const SignIn:SignInProps = (props:{}) => {
     return setIsValid(true);
   };
 
-  async function handleSubmit() {
-    validate();
-    console.log(`formData: `, form);
-    if (!isValid) return;
-
+  // TODO: Make this a module
+  async function postForm():Promise<Record<string, string>> {
     const postReq = await fetch('/api/auth/sign-in',{
       method: 'POST',
       headers: {
@@ -71,17 +75,27 @@ const SignIn:SignInProps = (props:{}) => {
       body: JSON.stringify(form)
     });
 
-    const resPost = await postReq.json();
-    const resData = resPost.data;
-    console.log(`submittedFormData: `, resData);
+    const postJson = await postReq.json();
+    const resPost = postJson.data;
 
-    if (resData.token) {
+    return resPost;
+  };
 
+  async function handleSubmit() {
+    validate();
+    console.log(`formData: `, form);
+    if (!isValid) return;
+
+    const resPost = await postForm();
+    console.log(`submittedFormData: `, resPost);
+
+    if (resPost.token) {
       dispatch(authSlice.actions.setIsAuth(true));
+      toast('Signed in successfully.');
 
       // manually set cookies for dev env as its not set by Chrome
       if (process.env.NODE_ENV === 'development') {
-        setCookie('token', resData.token);
+        setCookie('token', resPost.token);
 
         // check
         const tkn = cookies?.token;

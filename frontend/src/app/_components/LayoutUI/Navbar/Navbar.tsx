@@ -1,5 +1,10 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import {
+  useSelector,
+  selectIsAuth
+} from '@/lib/redux';
+import SignOut from '../../Auth/SignOut/SignOut';
 import styles from './navbar.module.css';
 
 
@@ -10,6 +15,8 @@ type NavbarProps = {
 
 const Navbar:NavbarProps = (props) => {
   const {  } = props;
+  const isAuth = useSelector(selectIsAuth);
+  console.log(`### isAuth: `, isAuth);
 
   return (
     <div className={styles['navbar']}>
@@ -19,7 +26,11 @@ const Navbar:NavbarProps = (props) => {
       <div className={styles['links']}>
         <Link href='/'>Home</Link>
         <Link href='/todos'>Todos</Link>
-        <Link href='/auth/sign-in'>SignIn</Link>
+        {
+          isAuth
+          ? <SignOut />
+          : <Link href='/auth/sign-in'>Sign In</Link>
+        }
       </div>
 
     </div>

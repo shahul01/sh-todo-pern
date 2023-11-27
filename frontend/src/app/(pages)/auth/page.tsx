@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 
 
-type TodosProps = {
+type AuthProps = {
 
 };
 
 
-const todos:TodosProps = (props) => {
+const Auth:AuthProps = (props) => {
   const {  } = props;
 
   return (
-    <div className='todos'>
+    <div className='auth'>
 
 
     </div>
@@ -18,4 +18,4 @@ const todos:TodosProps = (props) => {
 };
 
 
-export default todos;
+export default Auth;

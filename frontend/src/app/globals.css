@@ -2,6 +2,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --navbar-height: 4rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,7 +23,8 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-}
+  height: 100dvh;
+},
 
 body {
   color: rgb(var(--foreground-rgb));

@@ -1,0 +1,11 @@
+.layout {
+
+}
+
+.navbar-container {
+  height: var(--navbar-height);
+}
+
+.children-container {
+  height: calc(100% - var(--navbar-height));
+}

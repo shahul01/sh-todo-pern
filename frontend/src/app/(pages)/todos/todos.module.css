@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: clamp(1rem, 40vw, 6rem);
-  min-height: 100vh;
+  height: 100%;
 }
 
 .todo-app {

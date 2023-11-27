@@ -71,6 +71,11 @@ const login = async (req, res) => {
       }
     );
 
+    // if (app.get('env') === 'production') {
+    //   app.set('trust proxy', 1) // trust first proxy
+    //   sess.cookie.secure = true // serve secure cookies
+    // }
+
     res.status(200).json({ token, message: 'Login successful.' });
 
   } catch (error) {

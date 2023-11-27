@@ -50,7 +50,7 @@ const SignUp:SignUpProps = (props: {}) => {
       return setIsValid(false);
     };
 
-    // return setIsValid(true);
+    return setIsValid(true);
   };
 
   async function handleSubmit() {
@@ -123,7 +123,7 @@ const SignUp:SignUpProps = (props: {}) => {
           </span>
         </div>
 
-    </div>
+      </div>
 
     </div>
   )

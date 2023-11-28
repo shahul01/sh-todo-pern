@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useCookies } from 'react-cookie';
 import toast, { toastConfig } from 'react-simple-toasts';
@@ -25,6 +26,7 @@ type SignInProps = {
 const SignIn:SignInProps = (props:{}) => {
   const {  } = props;
 
+  const router = useRouter();
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
 
@@ -43,6 +45,15 @@ const SignIn:SignInProps = (props:{}) => {
   const [ form, setForm ] = useState(initialForm);
   // {isValid: false, error: ''}
   const [ isValid, setIsValid ] = useState(true);
+
+  function checkAndRedirect() {
+    if (isAuth) {
+      toast('Signed in, redirecting...');
+      setTimeout(() => {
+        router.push('/');
+      }, 800);
+    };
+  };
 
   function handleChangeForm(e:React.ChangeEvent<HTMLInputElement>) {
     setForm({
@@ -89,18 +100,21 @@ const SignIn:SignInProps = (props:{}) => {
 
     if (resPost.token) {
       dispatch(authSlice.actions.setIsAuth(true));
+      console.log('Auth: Setting token');
 
       // manually set cookies for dev env as its not set by Chrome
       if (process.env.NODE_ENV === 'development') {
-        setCookie('token', resPost.token);
-
-        // check
-        const tkn = cookies?.token;
-        console.log(`tkn: `, tkn);
+        setCookie('token', resPost.token, {path: '/'});
       };
 
+      const tokenSet = cookies?.token;
+      if (tokenSet) {
+        toast('Signed in successfully. Redirecting...');
+        setTimeout(() => {
+          router.push('/');
+        }, 800)
 
-      toast('Signed in successfully.');
+      };
 
     };
 
@@ -112,6 +126,8 @@ const SignIn:SignInProps = (props:{}) => {
 
   useEffect(() => {
     // console.log(`isAuth: `, isAuth);
+    // on mount
+    checkAndRedirect();
 
   }, [isAuth]);
 
@@ -120,6 +136,7 @@ const SignIn:SignInProps = (props:{}) => {
   return (
     <div className={styles['sign-in']}>
 
+      {/* TODO: Add alternative jsx if signed in. */}
       <h1>SignIn</h1>
       <h3 className={styles['error-text']}>
         {!isValid && 'Form has error'}

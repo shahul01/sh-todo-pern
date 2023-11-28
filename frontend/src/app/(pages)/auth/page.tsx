@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 
@@ -9,8 +9,9 @@ type AuthProps = {
 
 const Auth:AuthProps = (props:{}) => {
   const {  } = props;
+  const router = useRouter();
 
-  redirect('/auth/sign-in');
+  router.push('/auth/sign-in');
 
   return (
     <div className='auth'>

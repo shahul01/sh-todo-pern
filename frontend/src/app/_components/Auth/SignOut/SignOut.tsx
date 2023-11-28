@@ -1,10 +1,11 @@
+import { useRouter } from 'next/navigation';
+import { useCookies } from 'react-cookie';
+import toast, { toastConfig } from 'react-simple-toasts';
 import { useEffect, useState } from 'react';
 import {
   authSlice,
   useDispatch,
 } from '@/lib/redux';
-import { useCookies } from 'react-cookie';
-import toast, { toastConfig } from 'react-simple-toasts';
 
 
 type SignOutProps = {
@@ -15,8 +16,9 @@ type SignOutProps = {
 const SignOut:SignOutProps = (props:{}) => {
   const {  } = props;
 
-  const [ cookies, setCookie, removeCookie ] = useCookies('token');
+  const router = useRouter();
   const dispatch = useDispatch();
+  const [ cookies, setCookie, removeCookie ] = useCookies(['token']);
 
   toastConfig({
     position: 'top-center',
@@ -34,17 +36,20 @@ const SignOut:SignOutProps = (props:{}) => {
   async function handleSignOut() {
     const resPost = await postForm();
 
-    console.log(`resPost: `, resPost);
     if (resPost) {
       dispatch(authSlice.actions.setIsAuth(false));
+      console.log('Auth: Removing Token');
 
       // TODO: check if it automatically removes token for production
       if (process.env.NODE_ENV === 'development') {
-        const tokenR = removeCookie('token');
-
+        const tokenR = removeCookie('token', {path: '/'});
       };
 
-      toast('Signed out successfully.');
+      // TODO: check if cookies removed properly
+      toast('Signed out successfully. Redirecting...');
+      setTimeout(() => {
+        router.push('/auth/sign-in')
+      }, 800);
 
     };
   };

@@ -36,9 +36,11 @@ export default function RootLayout({
 
       // normal method of updating state doesn't work.
       // dispatch(authSlice.actions.setIsAuth(false));
+
+      reduxStore.dispatch(setIsAuth(true));
+
     };
 
-    reduxStore.dispatch(setIsAuth(true));
 
   };
 

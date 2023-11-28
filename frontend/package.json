@@ -12,6 +12,16 @@
     "node": ">=14.0.0"
   },
   "engineStrict": true,
+  "author": "shahul01",
+  "license": "ISC",
+  "keywords": [
+    "next",
+    "next.js",
+    "react",
+    "redux-toolkit",
+    "typescript",
+    "todo"
+  ],
   "dependencies": {
     "@formkit/auto-animate": "^0.8.1",
     "@reduxjs/toolkit": "^1.9.7",

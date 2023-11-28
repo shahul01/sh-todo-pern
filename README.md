@@ -5,6 +5,10 @@ Todo app created with PERN stack with authentication
   - frontend - React with Next
   - backend - NodeJS + Express + Postgress
 
+## images
+### Todos
+![todos](./frontend/assets/screenshots/todos.png)
+
 ## to run
 
   - frontend

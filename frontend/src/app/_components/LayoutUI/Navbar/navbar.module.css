@@ -1,8 +1,9 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid hsl(0deg 4.11% 18.8%);
   padding: 1rem 1rem;
-  border-bottom: 1px solid grey;
+  background: #000;
 }
 
 .logo {
@@ -11,6 +12,7 @@
 
 .links {
   display: flex;
+  align-items: center;
   gap: 1rem;
   text-decoration: underline;
 

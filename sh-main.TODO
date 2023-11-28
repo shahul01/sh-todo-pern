@@ -37,11 +37,12 @@ Total:
 
 
   # security:
-    ☐ salting check in backend.
+    ✔ salting check in backend. @done(23-11-28 19:50)
 
 
 
   # misc:
+    ✔ add new GH Release @done(23-11-28 19:50)
 
 
 

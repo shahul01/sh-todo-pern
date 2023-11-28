@@ -97,7 +97,8 @@ const Todos:TodosProps = (props:any) => {
 
     try {
       const addedTodos = await addTodos(newTodo);
-      // console.log(`addedTodos: `, addedTodos);
+      console.log(`addedTodos: `, addedTodos);
+      setNewTodoTitle('');
 
     } catch (error) {
       console.error(`sh-error: `, error);

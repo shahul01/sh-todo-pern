@@ -1,8 +1,10 @@
 "use client";
 
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useState } from 'react';
 import styles from './signUp.module.css';
+import toast, { toastConfig } from 'react-simple-toasts';
 
 
 type ModelUser = {
@@ -18,6 +20,12 @@ type SignUpProps = {
 const SignUp:SignUpProps = (props: {}) => {
   const {  } = props;
 
+  const router = useRouter();
+  toastConfig({
+    position: 'top-center',
+    duration: 3000,
+    className: 'custom-toast'
+  });
   const initialForm = {
     username: '',
     password: '',
@@ -65,11 +73,21 @@ const SignUp:SignUpProps = (props: {}) => {
       body: JSON.stringify(form)
     });
 
+    console.log(`postReq: `, postReq);
     const resPost = await postReq.json();
     const resData = resPost.data;
-    console.log(`submittedFormData: `, resData);
+
+    if (resData.id) {
+      console.log(`submittedFormData: `, resData);
+      toast('Signed up, redirecting...');
+      setTimeout(() => {
+        router.push('/auth/sign-in');
+      }, 800);
+
+    };
 
   };
+
 
   return (
     <div className={styles['sign-up']}>

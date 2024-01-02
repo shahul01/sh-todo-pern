@@ -40,7 +40,7 @@ const Todos:TodosProps = (props:any) => {
 
   async function fetchTodos() {
 
-    const getTodos = await fetch(`${backendBase}`, {
+    const getTodos = await fetch(`${backendBase}/todos`, {
       method: 'GET',
       credentials: 'include'
     });
@@ -51,7 +51,7 @@ const Todos:TodosProps = (props:any) => {
   };
 
   async function addTodos(addTodoData:Todo) {
-    const addTodo = await fetch(`${backendBase}`, {
+    const addTodo = await fetch(`${backendBase}/todos`, {
       method: 'POST',
       credentials: 'include',
       headers: { "Content-Type": "application/json" },
@@ -64,7 +64,7 @@ const Todos:TodosProps = (props:any) => {
   }
 
   async function deleteTodos(id:string) {
-    const deleteTodos = await fetch(`${backendBase}/${id}`, {
+    const deleteTodos = await fetch(`${backendBase}/todos/${id}`, {
       method: "DELETE",
       credentials: 'include'
     });

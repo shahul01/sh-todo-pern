@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import { backendBase } from '@/app/utils/constant';
 
 
 const page = () => {
   const [ result, setResult ] = useState('');
 
   async function fetchBackendTest() {
-    const getTest = await fetch('http://localhost:8000/test', {
+    const getTest = await fetch(`${backendBase}/test`, {
       method: 'GET'
     });
     const resTest = await getTest.json();

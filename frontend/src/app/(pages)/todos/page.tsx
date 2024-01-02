@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { backendBase } from '@/app/utils/constant';
 import toast, { toastConfig } from 'react-simple-toasts';
 import styles from './todos.module.css';
 
@@ -39,7 +40,7 @@ const Todos:TodosProps = (props:any) => {
 
   async function fetchTodos() {
 
-    const getTodos = await fetch('http://localhost:8000/todos', {
+    const getTodos = await fetch(`${backendBase}`, {
       method: 'GET',
       credentials: 'include'
     });
@@ -50,7 +51,7 @@ const Todos:TodosProps = (props:any) => {
   };
 
   async function addTodos(addTodoData:Todo) {
-    const addTodo = await fetch('http://localhost:8000/todos', {
+    const addTodo = await fetch(`${backendBase}`, {
       method: 'POST',
       credentials: 'include',
       headers: { "Content-Type": "application/json" },
@@ -63,7 +64,7 @@ const Todos:TodosProps = (props:any) => {
   }
 
   async function deleteTodos(id:string) {
-    const deleteTodos = await fetch(`http://localhost:8000/todos/${id}`, {
+    const deleteTodos = await fetch(`${backendBase}/${id}`, {
       method: "DELETE",
       credentials: 'include'
     });

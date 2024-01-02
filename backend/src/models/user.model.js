@@ -29,6 +29,7 @@ const User = (sequelize) => {
 
   );
 
+  // NOTE:
   UserDefinition.beforeCreate(async (user) => {
     const saltRounds = 10;
     user.salt = await bcrypt.genSalt(saltRounds);

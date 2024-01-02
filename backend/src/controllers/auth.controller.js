@@ -20,6 +20,7 @@ const register = async (req, res) => {
       })
     };
 
+    // NOTE:
     const user = await User.create({ username, password });
 
     res.status(201).json({ id: user.id, username: user.username });
@@ -57,6 +58,7 @@ const login = async (req, res) => {
       })
     };
 
+    // NOTE:
     const token = jwt.sign(
       { userId: user.id },
       process.env.JWT_SECRET,
@@ -65,7 +67,9 @@ const login = async (req, res) => {
 
 
     // cookies dont set on localhost,
-    // maybe you can manually set it for dev env
+    // TODO: maybe you can manually set it for dev env
+
+    // setting cookies
     res.cookie(
       'token', token, {
         httpOnly: true,

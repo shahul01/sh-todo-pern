@@ -6,9 +6,9 @@ import { sequelize } from './models/index.js';
 
 dotenv.config();
 const app = express();
-const port = 8000;
+const port = Number(process.env.PORT || 8005);
 
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({credentials: true, origin: 'http://localhost:3005'}));
 app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 

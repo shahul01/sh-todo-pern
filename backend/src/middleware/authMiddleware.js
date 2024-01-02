@@ -14,6 +14,7 @@ function authToken(req, res, next) {
     })
   };
 
+  // NOTE:
   jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
     if (error) {
       return res.status(401).json( {

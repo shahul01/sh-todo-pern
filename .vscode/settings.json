@@ -3,5 +3,8 @@
     "pern",
     "pkey",
     "UUIDV"
-  ]
+  ],
+  "editor": {
+    "rulers": [ 71 ]
+  }
 }

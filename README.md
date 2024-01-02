@@ -13,6 +13,9 @@ Todo app created with PERN stack with authentication
 
   - frontend
   ```bash
+
+    cd frontend
+
     # install
     npm i
     # or its alternatives like yarn
@@ -23,5 +26,14 @@ Todo app created with PERN stack with authentication
     yarn dev
   ```
 
-  - backend - follow its package json
+  - backend
+  ```bash
 
+    cd backend
+
+    # install
+    npm i
+
+    # run
+    npm run dev
+  ```

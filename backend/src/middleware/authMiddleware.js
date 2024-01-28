@@ -3,8 +3,10 @@ import jwt from 'jsonwebtoken';
 
 function authToken(req, res, next) {
 
-  const rawToken = req.headers?.cookie;
-  const token = rawToken?.split('=')?.[1] || '';
+  const allRawTokens = req.headers?.cookie;
+  const tokenName = process.env.TOKEN_NAME || 'sh-todo-token'
+
+  const token = allRawTokens?.split(`${tokenName}=`)?.[1] || '';
 
   if (!token) {
 
@@ -26,7 +28,7 @@ function authToken(req, res, next) {
 
     next();
 
-  })
+  });
 
 };
 

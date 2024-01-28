@@ -6,6 +6,7 @@ import {
   authSlice,
   useDispatch,
 } from '@/lib/redux';
+const tokenName = process.env.TOKEN_NAME || 'sh-todo-token';
 
 
 type SignOutProps = {
@@ -18,7 +19,7 @@ const SignOut:SignOutProps = (props:{}) => {
 
   const router = useRouter();
   const dispatch = useDispatch();
-  const [ cookies, setCookie, removeCookie ] = useCookies(['token']);
+  const [ cookies, setCookie, removeCookie ] = useCookies([tokenName]);
 
   toastConfig({
     position: 'top-center',
@@ -42,11 +43,11 @@ const SignOut:SignOutProps = (props:{}) => {
 
       // TODO: check if it automatically removes token for production
       if (process.env.NODE_ENV === 'development') {
-        const tokenR = removeCookie('token', {path: '/'});
+        const tokenR = removeCookie(tokenName, {path: '/'});
       };
 
       // TODO: check if cookies removed properly
-      toast('Signed out successfully. Redirecting...');
+      toast('Signed out successfully. Redirecting to sign in page...');
       setTimeout(() => {
         router.push('/auth/sign-in')
       }, 800);

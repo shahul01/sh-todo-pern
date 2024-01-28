@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/index.js';
 
+const tokenName = process.env.TOKEN_NAME || 'sh-todo-token';
 
 // router.post('/register')
 const register = async (req, res) => {
@@ -71,7 +72,7 @@ const login = async (req, res) => {
 
     // setting cookies
     res.cookie(
-      'token', token, {
+      tokenName, token, {
         httpOnly: true,
         // secure: true,
         // sameSite: 'none'
@@ -97,7 +98,7 @@ const login = async (req, res) => {
 
 // router.post('/logout')
 const logout = async (req, res) => {
-  res.clearCookie('token');
+  res.clearCookie(tokenName);
   res.status(200).json({
     message: 'Logged out successfully.'
   });

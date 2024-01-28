@@ -1,3 +1,4 @@
+"use client";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -11,11 +12,16 @@ const Auth:AuthProps = (props:{}) => {
   const {  } = props;
   const router = useRouter();
 
-  router.push('/auth/sign-in');
+  // redirect
+  (() => {
+    setTimeout(() => {
+      router.push('/auth/sign-in');
+    }, 800);
+  })();
 
   return (
     <div className='auth'>
-      <p>Redirecting...</p>
+      <p>Redirecting to sign in...</p>
 
     </div>
   )

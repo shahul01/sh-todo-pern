@@ -12,6 +12,7 @@ import {
   selectIsAuth
 } from '@/lib/redux';
 import styles from './signIn.module.css';
+const tokenName = process.env.TOKEN_NAME || 'sh-todo-token';
 
 type ModelUser = {
   username: string;
@@ -30,7 +31,7 @@ const SignIn:SignInProps = (props:{}) => {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
 
-  const [ cookies, setCookie, removeCookie ] = useCookies(['token']);
+  const [ cookies, setCookie, removeCookie ] = useCookies([tokenName]);
   toastConfig({
     position: 'top-center',
     duration: 3000,
@@ -48,7 +49,7 @@ const SignIn:SignInProps = (props:{}) => {
 
   function checkAndRedirect() {
     if (isAuth) {
-      toast('Signed in, redirecting...');
+      toast('Signed in, redirecting to home page...');
       setTimeout(() => {
         router.push('/');
       }, 800);
@@ -104,12 +105,12 @@ const SignIn:SignInProps = (props:{}) => {
 
       // manually set cookies for dev env as its not set by Chrome
       if (process.env.NODE_ENV === 'development') {
-        setCookie('token', resPost.token, {path: '/'});
+        setCookie(tokenName, resPost.token, {path: '/'});
       };
 
       const tokenSet = cookies?.token;
       if (tokenSet) {
-        toast('Signed in successfully. Redirecting...');
+        toast('Signed in, redirecting to home page...');
         setTimeout(() => {
           router.push('/');
         }, 800)

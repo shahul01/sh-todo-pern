@@ -79,7 +79,7 @@ const SignUp:SignUpProps = (props: {}) => {
 
     if (resData.id) {
       console.log(`submittedFormData: `, resData);
-      toast('Signed up, redirecting...');
+      toast('Signed up, redirecting to sign in page...');
       setTimeout(() => {
         router.push('/auth/sign-in');
       }, 800);

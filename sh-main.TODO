@@ -1,5 +1,8 @@
 Total:
   # bugs:
+    ☐ Refreshing deletes the auth
+    ☐ todo data is shared!
+    ☐ if re password not matching, no error is given
 
 
 
@@ -8,7 +11,10 @@ Total:
 
 
   # important:
+    ☐ Build and run for production
     ☐ security
+
+    - Remember inline TODOs
 
 
 
@@ -17,6 +23,7 @@ Total:
 
 
   # techstack:
+    ☐ Drizzle / Prisma ORM
 
 
 
@@ -39,6 +46,12 @@ Total:
 
   # security:
     ✔ salting check in backend. @done(23-11-28 19:50)
+    ☐ add JSDoc
+    ☐ add ESLint
+    ☐ github security
+        ☐ dependabot
+    ☐ helmet
+    ☐ a0b1: add check to block expired token
 
 
 
@@ -48,7 +61,18 @@ Total:
 
 
   # docs & reference:
+    PERN-Store:
+      - https://github.com/dhatGuy/PERN-Store
+      - D:\Shahul\test-codes\fullstack\PERN-Store
+    - D:\Shahul\test-codes\fullstack\youtube-pern-auth
 
+    - https://chatgpt.com/c/28b15049-6b86-4b6c-a79a-9aa206a4c7cb
+
+    - D:\Shahul\test-codes\fullstack\react-nodejs-todo-list
+    - D:\Shahul\test-codes\fullstack\Traversy\proshop_mern # has pagination in backend etc
+    - https://github.com/bradtraversy/mern-auth/blob/master/backend/controllers/userController.js
+
+    - https://www.prisma.io/docs/orm/more/migrating-to-prisma/migrate-from-sequelize
 
 
   # symbols:

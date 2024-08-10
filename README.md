@@ -18,12 +18,9 @@ Todo app created with PERN stack with authentication
 
     # install
     npm i
-    # or its alternatives like yarn
 
     # run
     npm run dev
-    # or
-    yarn dev
   ```
 
   - backend

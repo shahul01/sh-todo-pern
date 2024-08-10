@@ -86,6 +86,7 @@ const SignIn:SignInProps = (props:{}) => {
       },
       body: JSON.stringify(form)
     });
+    console.log(`form: `, form);
 
     const postJson = await postReq.json();
     const resPost = postJson.data;

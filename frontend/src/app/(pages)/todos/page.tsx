@@ -51,6 +51,7 @@ const Todos:TodosProps = (props:any) => {
   };
 
   async function addTodos(addTodoData:Todo) {
+    if (!addTodoData.title) return;
     const addTodo = await fetch(`${backendBase}/todos`, {
       method: 'POST',
       credentials: 'include',
@@ -132,7 +133,12 @@ const Todos:TodosProps = (props:any) => {
     <div className={styles['todos']}>
     <div className={styles['todo-app']}>
       <div className={styles['input-btn']}>
-        <input type='text' value={newTodoTitle} onChange={(e) => setNewTodoTitle(e.target.value)} />
+        <input
+            type='text'
+            value={newTodoTitle}
+            onChange={(e) => setNewTodoTitle(e.target.value)}
+            // required={true}
+        />
         <button type='button' onClick={handleAdd}>
           Add
         </button>

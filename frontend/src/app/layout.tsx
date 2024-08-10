@@ -3,7 +3,7 @@
 import { Inter } from 'next/font/google';
 // import type { Metadata } from 'next';
 import { useCookies } from 'react-cookie';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import Navbar from '@/app/_components/LayoutUI/Navbar/Navbar';
 import { Providers } from '@/lib/providers';
 import {
@@ -27,27 +27,19 @@ export default function RootLayout({
 }) {
 
   // const dispatch = useDispatch();
-  const [cookies] = useCookies(['token']);
+  const tokenName = process.env.NEXT_PUBLIC_TOKEN_NAME || 'token';
+  const [ cookies, ..._rest ] = useCookies([tokenName]);
   const {setIsAuth} = authSlice.actions;
 
-  function checkAuth() {
-    if (cookies.token) {
-      // console.log('cookie', cookies.token);
+  const checkAuth = useCallback(() => {
+    if (cookies[tokenName]) reduxStore.dispatch(setIsAuth(true));
 
-      // normal method of updating state doesn't work.
-      // dispatch(authSlice.actions.setIsAuth(false));
-
-      reduxStore.dispatch(setIsAuth(true));
-
-    };
-
-
-  };
+  }, [cookies, setIsAuth, tokenName]);
 
   useEffect(() => {
     checkAuth();
 
-  }, [cookies.token]);
+  }, [checkAuth, cookies]);
 
 
   return (

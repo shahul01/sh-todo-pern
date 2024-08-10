@@ -1,6 +1,6 @@
 Total:
   # bugs:
-    ☐ Refreshing deletes the auth; It actually didn't update the isAuth redux state
+    ✔ Refreshing deletes the auth; It actually didn't update the isAuth redux state @done(24-08-10 18:56)
     ✔ todo data is shared! @done(24-08-10 18:35)
     ✔ if re password not matching, no error is given @done(24-08-10 18:34)
     ☐ 26sd: return doesn't show error on FE; but response is received, use toast
@@ -50,7 +50,7 @@ Total:
     ☐ add JSDoc
     ☐ add ESLint
     ☐ github security
-        ☐ dependabot
+      ☐ dependabot
     ☐ helmet
     ✔ a0b1: add check to block expired token @done(24-08-10 18:37)
 

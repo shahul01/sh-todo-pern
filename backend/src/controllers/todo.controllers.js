@@ -33,6 +33,9 @@ const getTodos = async (req, res) => {
 const addTodo = async (req, res) => {
   try {
     const { body } = req;
+
+    if (!body.title) return res.status(400).json({message: 'No title is sent.'});
+
     const todoWithUser = { ...body, userId: req.decodedUserId };
     const { dataValue: { title: createdTodoTitle } } = await Todo.create(todoWithUser);
 

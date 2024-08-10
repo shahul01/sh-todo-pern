@@ -1,9 +1,10 @@
 Total:
   # bugs:
-    ☐ Refreshing deletes the auth
-    ☐ todo data is shared!
-    ☐ if re password not matching, no error is given
-
+    ☐ Refreshing deletes the auth; It actually didn't update the isAuth redux state
+    ✔ todo data is shared! @done(24-08-10 18:35)
+    ✔ if re password not matching, no error is given @done(24-08-10 18:34)
+    ☐ 26sd: return doesn't show error on FE; but response is received, use toast
+    ☐ password shouldn't show in network tab's req payload
 
 
   # problem:
@@ -51,7 +52,7 @@ Total:
     ☐ github security
         ☐ dependabot
     ☐ helmet
-    ☐ a0b1: add check to block expired token
+    ✔ a0b1: add check to block expired token @done(24-08-10 18:37)
 
 
 

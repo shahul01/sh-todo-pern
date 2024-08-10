@@ -9,33 +9,42 @@ function authToken(req, res, next) {
 
   console.log(`token: `, token);
   if (!token) {
-    // FIX: return doesn't show error on FE;
+    // FIX: 26sd
     console.error('No token. Unauthorized / Invalid token.')
     return res.status(401).json({ message: 'Unauthorized / Invalid token.' });
   };
 
-  // TODO: a0b1:
   // NOTE:
-  jwt.verify(token, process.env.JWT_SECRET, async (error, decoded) => {
-    if (error) {
-      return res.status(401).json({
-        message: 'Unauthorized / Invalid token. ' + error.message
+  jwt.verify(
+    token,
+    process.env.JWT_SECRET,
+    async (error, decoded) => {
+      if (error) {
+        return res.status(401).json({
+          message: 'Unauthorized / Invalid token. ' + error.message
+        });
+      };
+
+      if (Date.now() >= decoded.exp * 1000) {
+        return res.status(401).json({
+          message: 'Token expired, please re-login.'
+        });
+      };
+
+      const matchedUser = await User.findByPk(decoded.userId);
+      const matchedUserId = matchedUser?.dataValues?.id;
+
+      // Give error if no user is matched
+      if (!matchedUserId) res.status(401).json({
+        message: 'No such user. ' + error?.message
       });
-    };
 
-    const matchedUser = await User.findByPk(decoded.userId);
-    const matchedUserId = matchedUser?.dataValues?.id;
+      req.decodedUserId = matchedUserId;
 
-    // Give error if no user is matched
-    if (!matchedUserId) res.status(401).json({
-      message: 'No such user. ' + error?.message
-    });
+      next();
 
-    req.decodedUserId = matchedUserId;
-
-    next();
-
-  });
+    }
+  );
 
 };
 

@@ -14,8 +14,12 @@ import { Todo } from '../models/index.js';
 // router.get('/')
 const getTodos = async (req, res) => {
   try {
+    const { decodedUserId } = req;
 
-    const todos = await Todo.findAll();
+    const todos = await Todo.findAll({
+      where: { userId: decodedUserId },
+    });
+
     res.status(200).json(todos);
 
   } catch (error) {
@@ -28,11 +32,13 @@ const getTodos = async (req, res) => {
 // router.post('/')
 const addTodo = async (req, res) => {
   try {
-
     const { body } = req;
-    await Todo.create(body);
+    const todoWithUser = { ...body, userId: req.decodedUserId };
+    const { dataValue: { title: createdTodoTitle } } = await Todo.create(todoWithUser);
 
-    res.status(200).json({ message: `Todo added successfully with title ${body?.title}` });
+    res
+      .status(200)
+      .json({ message: `Todo added successfully with title ${createdTodoTitle}` });
 
   } catch (error) {
     console.error(error);
@@ -43,15 +49,16 @@ const addTodo = async (req, res) => {
 // router.delete('/:id')
 const deleteTodo = async (req, res) => {
   try {
+    const { params: { id: reqId }, decodedUserId } = req;
 
-    const reqId = req.params.id;
-    await Todo.destroy({
+    const {dataValue: { id: deletedTodoId }} = await Todo.destroy({
       where: {
-        id: reqId
+        userId: decodedUserId,
+        id: reqId,
       }
-    })
+    });
 
-    res.status(200).json({ message: `Todo deleted successfully of id ${reqId}`});
+    res.status(200).json({ message: `Todo deleted successfully. Id - ${deletedTodoId}`});
 
   } catch (error) {
     console.error(error);

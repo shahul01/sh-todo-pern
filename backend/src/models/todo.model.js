@@ -16,7 +16,7 @@ const Todo = (sequelize) => {
       },
       description: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
       },
 
     },

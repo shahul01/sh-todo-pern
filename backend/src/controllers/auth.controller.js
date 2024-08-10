@@ -4,8 +4,12 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/index.js';
 
+
 const tokenName = process.env.TOKEN_NAME || 'sh-todo-token';
 
+// @desc    Register User
+// @route   POST /api/auth/sign-up
+// @access  Public
 // router.post('/register')
 const register = async (req, res) => {
   try {
@@ -21,8 +25,11 @@ const register = async (req, res) => {
       })
     };
 
+    // NOTE: User.create() has a fn that adds hash and salt when creating user
     // NOTE:
     const user = await User.create({ username, password });
+
+    // TODO: Sign JWT and set Cookie here also
 
     res.status(201).json({ id: user.id, username: user.username });
 
@@ -67,15 +74,16 @@ const login = async (req, res) => {
     );
 
 
-    // cookies dont set on localhost,
+    // cookies don't set on localhost,
     // TODO: maybe you can manually set it for dev env
 
     // setting cookies
     res.cookie(
       tokenName, token, {
         httpOnly: true,
-        // secure: true,
-        // sameSite: 'none'
+        // secure: true, // Use secure cookies in production
+        // sameSite: 'strict', // Prevent CSRF attacks
+        // maxAge: 30*24*60*60*1_000 // 30 days
       }
     );
 

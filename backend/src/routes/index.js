@@ -10,8 +10,8 @@ import authToken from "../middleware/authMiddleware.js";
  */
 export function initRoutes(app) {
 
-  app.use('/test', (req, res) => {
-    res.json({"message": "Backend running"});
+  app.use('/ping', (req, res) => {
+    res.json({"message": "Backend is running!"});
   });
 
   app.use('/auth', authRoutes);

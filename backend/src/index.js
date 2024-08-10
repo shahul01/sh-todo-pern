@@ -1,3 +1,6 @@
+/**
+ * server → routes → controller → model
+ */
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -15,9 +18,9 @@ app.use(express.json());
 
 initRoutes(app);
 
-// {force: true} will drop all tables and recreate them everytime the server starts
+// {force: true} will drop all tables and recreate them every time the server starts
 // refer - gpt, https://sebhastian.com/sequelize-create-table/
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ alter: false, force: false }).then(() => {
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });

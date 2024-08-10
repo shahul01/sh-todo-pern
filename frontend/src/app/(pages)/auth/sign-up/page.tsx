@@ -1,10 +1,10 @@
 "use client";
 
+import toast, { toastConfig } from 'react-simple-toasts';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './signUp.module.css';
-import toast, { toastConfig } from 'react-simple-toasts';
 
 
 type ModelUser = {
@@ -13,9 +13,7 @@ type ModelUser = {
 };
 
 type SignUpProps = {
-
 };
-
 
 const SignUp:SignUpProps = (props: {}) => {
   const {  } = props;
@@ -34,6 +32,7 @@ const SignUp:SignUpProps = (props: {}) => {
 
   const [ form, setForm ] = useState(initialForm);
   // {isValid: false, error: ''}
+  const isValidRef = useRef(true);
   const [ isValid, setIsValid ] = useState(true);
 
   function handleChangeForm(e:React.ChangeEvent<HTMLInputElement>) {
@@ -47,23 +46,22 @@ const SignUp:SignUpProps = (props: {}) => {
     const { username, password, rePassword  } = form;
 
     if (!username || !password || !rePassword) {
-      return setIsValid(false);
+      isValidRef.current = false;
+    } else if (password !== rePassword) {
+      isValidRef.current = false;
+    } else {
+      isValidRef.current = true;
     };
-
     // if (username.length <= 3 || password.length <= 3) {
     //   return false;
-    // }
+    // };
 
-    if (password !== rePassword) {
-      return setIsValid(false);
-    };
-
-    return setIsValid(true);
+    setIsValid(p => isValidRef.current);
   };
 
   async function handleSubmit() {
     validate();
-    if (!isValid) return;
+    if (!isValidRef.current) return;
 
     const postReq = await fetch('/api/auth/sign-up',{
       method: 'POST',
